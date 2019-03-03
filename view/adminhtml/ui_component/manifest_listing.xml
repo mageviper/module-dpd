@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">manifest_listing.manifest_listing_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Dpd Courier</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="prepare">
+                <url path="*/*/action_prepare"/>
+                <class>primary</class>
+                <label>Prepare orders to manifest</label>
+            </button>
+        </buttons>
+        <spinner>manifest_listing_columns</spinner>
+        <deps>
+            <dep>manifest_listing.manifest_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="manifest_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Mageviper_Dpd::grid</aclResource>
+        <dataProvider class="Mageviper\Dpd\Grid\Manifest\DataProvider" name="manifest_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls">
+            <settings>
+                <storageConfig>
+                    <provider>manifest_listing.manifest_listing.manifest_listing_columns</provider>
+                </storageConfig>
+                <componentType>Magento_Ui/js/grid/controls/columns</componentType>
+            </settings>
+        </columnsControls>
+        <massaction name="listing_massaction">
+            <settings>
+                <selectProvider>manifest_listing.manifest_listing.manifest_listing_columns.ids</selectProvider>
+                <indexField>id</indexField>
+            </settings>
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure to delete selected manifest url?</message>
+                        <title translate="true">Delete manifest</title>
+                    </confirm>
+                    <url path="*/*/action/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+        <filters name="listing_filters"/>
+    </listingToolbar>
+    <columns name="manifest_listing_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">manifest_listing.manifest_listing.manifest_listing_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">view</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>desc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <timezone>false</timezone>
+                <dateFormat>yyyy-MM-dd, HH:mm:ss</dateFormat>
+                <filter>dateRange</filter>
+                <editor>
+                    <editorType>date</editorType>
+                </editor>
+                <dataType>date</dataType>
+                <label translate="true">Created at</label>
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <timezone>false</timezone>
+                <dateFormat>yyyy-MM-dd, HH:mm:ss</dateFormat>
+                <filter>dateRange</filter>
+                <editor>
+                    <editorType>date</editorType>
+                </editor>
+                <dataType>date</dataType>
+                <label translate="true">Updated at</label>
+            </settings>
+        </column>
+        <column name="send_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <timezone>false</timezone>
+                <dateFormat>yyyy-MM-dd, HH:mm:ss</dateFormat>
+                <filter>dateRange</filter>
+                <editor>
+                    <editorType>date</editorType>
+                </editor>
+                <dataType>date</dataType>
+                <label translate="true">Send at</label>
+            </settings>
+        </column>
+        <column name="status" class="Mageviper\Dpd\Ui\Component\Listing\Column\Manifest\Status">
+            <settings>
+                <label translate="true">Status</label>
+                <options class="Mageviper\Dpd\Ui\Component\Listing\Column\Manifest\StatusType"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="150" class="Mageviper\Dpd\Ui\Component\Listing\Column\Manifest\Action">
+            <settings>
+                <resizeEnabled>false</resizeEnabled>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

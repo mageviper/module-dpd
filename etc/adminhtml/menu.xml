@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageviper_Dpd::grid"
+             title="Dpd Courier"
+             module="Mageviper_Dpd"
+             action="mageviper_dpd/manifest/index"
+             resource="Magento_Backend::content"
+             parent="Mageviper_Core::mageviper_menu" sortOrder="1"/>
+    </menu>
+</config>

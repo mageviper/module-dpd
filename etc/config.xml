@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <dpd>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Mageviper\Dpd\Model\Carrier\Dpd</model>
+                <title>DPD</title>
+                <max_weight>2</max_weight>
+            </dpd>
+        </carriers>
+        <mageviper_shipping_integration>
+            <mageviper_dpd>
+                <integration>
+                    <test_data>
+                        <login>test</login>
+                        <password>thetu4Ee</password>
+                        <masterfid>1495</masterfid>
+                        <addressfid>1495</addressfid>
+                    </test_data>
+                </integration>
+            </mageviper_dpd>
+        </mageviper_shipping_integration>
+    </default>
+</config>

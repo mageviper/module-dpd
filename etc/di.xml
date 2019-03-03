@@ -1,0 +1,60 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mageviper\Dpd\Api\Data\ManifestInterface" type="Mageviper\Dpd\Model\Data\Manifest"/>
+    <preference for="Mageviper\Dpd\Api\ManifestRepositoryInterface" type="Mageviper\Dpd\Model\ResourceModel\ManifestRepository"/>
+    <preference for="Mageviper\Dpd\Model\Spi\ManifestResourceInterface" type="Mageviper\Dpd\Model\ResourceModel\Manifest"/>
+    <preference for="Mageviper\Dpd\Model\Spi\ManifestRegistryInterface" type="Mageviper\Dpd\Model\ManifestRegistry"/>
+    <preference for="Mageviper\Dpd\Api\Data\PackageInterface" type="Mageviper\Dpd\Model\Data\Package"/>
+    <preference for="Mageviper\Dpd\Api\PackageRepositoryInterface" type="Mageviper\Dpd\Model\ResourceModel\PackageRepository"/>
+    <preference for="Mageviper\Dpd\Model\Spi\PackageResourceInterface" type="Mageviper\Dpd\Model\ResourceModel\Package"/>
+    <preference for="Mageviper\Dpd\Model\Spi\PackageRegistryInterface" type="Mageviper\Dpd\Model\PackageRegistry"/>
+
+    <virtualType name="Mageviper\Dpd\Grid\Manifest\FilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mageviper\Dpd\Grid\Manifest\DataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object">Mageviper\Dpd\Model\ResourceModel\Manifest\Collection</argument>
+            <argument name="filterPool" xsi:type="object">Mageviper\Dpd\Grid\FilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mageviper\Dpd\Model\ResourceModel\Manifest\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Mageviper\Dpd\Model\ResourceModel\Manifest::MAIN_TABLE</argument>
+            <argument name="resourceModel" xsi:type="string">Mageviper\Dpd\Model\ResourceModel\Manifest</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mageviper\Dpd\Grid\Package\FilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mageviper\Dpd\Grid\Package\DataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object">Mageviper\Dpd\Model\ResourceModel\Package\Collection</argument>
+            <argument name="filterPool" xsi:type="object">Mageviper\Dpd\Grid\FilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mageviper\Dpd\Model\ResourceModel\Package\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Mageviper\Dpd\Model\ResourceModel\Package::MAIN_TABLE</argument>
+            <argument name="resourceModel" xsi:type="string">Mageviper\Dpd\Model\ResourceModel\Package</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="manifest_listing_data_source" xsi:type="string">Mageviper\Dpd\Model\ResourceModel\Manifest\Grid\Collection</item>
+                <item name="package_listing_data_source" xsi:type="string">Mageviper\Dpd\Model\ResourceModel\Package\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

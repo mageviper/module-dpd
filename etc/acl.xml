@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="Mageviper_Shipping::core">
+                        <resource id="Mageviper_Dpd::config" sortOrder="20" title="Dpd Courier Config" translate="title"/>
+                        <resource id="Mageviper_Dpd::grid" sortOrder="40" title="Dpd Courier" translate="title"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

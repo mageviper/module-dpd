@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">package_listing.package_listing_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Dpd Courier</item>
+    </argument>
+    <settings>
+        <buttons>
+        <button name="back">
+            <url path="*/manifest/index"/>
+            <class>back</class>
+            <label>Back</label>
+        </button>
+    </buttons>
+        <spinner>package_listing_columns</spinner>
+        <deps>
+            <dep>package_listing.package_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="package_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <filterUrlParams>
+                <param name="manifest_id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Mageviper\Dpd\Grid\Package\DataProvider" name="package_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <paging name="listing_paging"/>
+        <filters name="listing_filters"/>
+    </listingToolbar>
+    <columns name="package_listing_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">package_listing.package_listing.package_listing_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">view</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="order_id" sortOrder="20">
+            <settings>
+                <label translate="true">Order</label>
+                <dataType>text</dataType>
+                <filter>text</filter>
+            </settings>
+        </column>
+        <column name="package_id" sortOrder="40">
+            <settings>
+                <label translate="true">Package number</label>
+                <dataType>text</dataType>
+                <filter>text</filter>
+            </settings>
+        </column>
+        <column name="tracking_number" sortOrder="50">
+            <settings>
+                <label translate="true">Tracking number</label>
+                <dataType>text</dataType>
+                <filter>text</filter>
+            </settings>
+        </column>
+        <actionsColumn name="actions" sortOrder="150" class="Mageviper\Dpd\Ui\Component\Listing\Column\Packages\Action">
+            <settings>
+                <resizeEnabled>false</resizeEnabled>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

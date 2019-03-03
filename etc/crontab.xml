@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="mageviper_dpd_queue_cron" instance="Mageviper\Dpd\Cron\QueueManifest" method="execute">
+            <!--<schedule>* * * * *</schedule>-->
+            <config_path>crontab/default/jobs/mageviper_dpd_queue_cron/schedule/cron_expr</config_path>
+        </job>
+        <job name="mageviper_dpd_manifest_cron" instance="Mageviper\Dpd\Cron\PrepareManifest" method="execute">
+            <!--<schedule>* * * * *</schedule>-->
+            <config_path>crontab/default/jobs/mageviper_dpd_manifest_cron/schedule/cron_expr</config_path>
+        </job>
+    </group>
+</config>
