@@ -14,6 +14,7 @@
         <mageviper_shipping_integration>
             <mageviper_dpd>
                 <integration>
+                    <test>1</test>
                     <test_data>
                         <login>test</login>
                         <password>thetu4Ee</password>

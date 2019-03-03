@@ -40,7 +40,7 @@ class Action extends Column
                             'order_id' => $item['order_id']
                         ]
                     ),
-                    'label'  => __('Renew parcel'),
+                    'label'  => __('Send parcel'),
                     'hidden' => false
                 ];
                 $item[$this->getData('name')]['download_label']    = [

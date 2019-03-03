@@ -134,7 +134,7 @@
 
                     <field id="order_status_to_send" translate="label comment" type="multiselect" sortOrder="40"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Order Statuses to be sent</label>
+                        <label>Order Statuses to sent</label>
                         <comment>Specify statuses of orders that should be automatically sent to Carrier.</comment>
                         <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
                     </field>
@@ -155,7 +155,7 @@
                     <label>Cron frequencies</label>
                     <field id="prepare" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
                            showInStore="0">
-                        <label>Automation Prepare Manifest</label>
+                        <label>Prepare Manifest</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="frequency_manifest" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -174,11 +174,11 @@
                     </field>
                     <field id="queue" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1"
                            showInStore="0">
-                        <label>Test mode</label>
+                        <label>Queue Processing</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="frequency_queue" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Automation Queue Processing</label>
+                        <label>Frequency</label>
                         <source_model>Mageviper\Dpd\Model\Config\Source\Frequency</source_model>
                         <backend_model>Mageviper\Dpd\Model\Config\Backend\Queue</backend_model>
                         <depends>
