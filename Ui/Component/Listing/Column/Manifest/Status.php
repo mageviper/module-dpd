@@ -42,7 +42,7 @@ class Status extends Column
                         break;
                     case Manifest::QUEUE;
                         $class = 'grid-severity-minor';
-                        $text  = __('Added to queued');
+                        $text  = __('Added to queue');
                         break;
                     case Manifest::PROCESSING;
                         $class = 'grid-severity-minor';
