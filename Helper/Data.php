@@ -28,6 +28,8 @@ class Data extends AbstractHelper
     const XML_PATH_API_TEST_MASTER_FID    = 'mageviper_shipping_integration/mageviper_dpd/integration/test_data/masterfid';
     const XML_PATH_API_TEST_ADDRESS_FID   = 'mageviper_shipping_integration/mageviper_dpd/integration/test_data/addressfid';
     const XML_CONFIG_ORDER_STATUS_TO_SEND = 'mageviper_shipping_integration/mageviper_dpd/integration/order_status_to_send';
+    const XML_PATH_MANIFEST_FILE          = 'mageviper_shipping_integration/mageviper_dpd/dpd_mainfest/file_type';
+    const XML_PATH_MANIFEST_LABEL         = 'mageviper_shipping_integration/mageviper_dpd/dpd_mainfest/label_type';
     const XML_PATH_CRON_QUEUE             = 'mageviper_shipping_integration/dpd_cron/prepare';
     const XML_PATH_CRON_MANIFEST          = 'mageviper_shipping_integration/dpd_cron/queue';
     const XML_PATH_CARRIER_ORDER_STATUS   = 'carriers/dpd/order_status';
@@ -45,7 +47,7 @@ class Data extends AbstractHelper
     /**
      * @return string|null
      */
-    public function getLogin()
+    public function getLogin(): ?string
     {
         if (!$this->isTestMode()) {
             return $this->scopeConfig->getValue(self::XML_PATH_API_LOGIN);
@@ -57,7 +59,7 @@ class Data extends AbstractHelper
     /**
      * @return string|null
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         if (!$this->isTestMode()) {
             return $this->scopeConfig->getValue(self::XML_PATH_API_PASSWORD);
@@ -69,7 +71,7 @@ class Data extends AbstractHelper
     /**
      * @return int|null
      */
-    public function getManifestFid()
+    public function getManifestFid(): ?int
     {
         if (!$this->isTestMode()) {
             return (int)$this->scopeConfig->getValue(self::XML_PATH_API_MASTER_FID);
@@ -79,9 +81,9 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getAddressFid()
+    public function getAddressFid(): ?int
     {
         if (!$this->isTestMode()) {
             return (int)$this->scopeConfig->getValue(self::XML_PATH_API_ADDRESS_FID);
@@ -93,9 +95,25 @@ class Data extends AbstractHelper
     /**
      * @return string|null
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): ?string
     {
         return $this->scopeConfig->getValue(self::XML_PATH_CARRIER_ORDER_STATUS);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFileType(): ?string
+    {
+        return (string)$this->scopeConfig->getValue(self::XML_PATH_MANIFEST_FILE);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLabelType(): ?string
+    {
+        return $this->scopeConfig->getValue(self::XML_PATH_MANIFEST_LABEL);
     }
 
     /**

@@ -22,6 +22,10 @@
                         <addressfid>1495</addressfid>
                     </test_data>
                 </integration>
+                <dpd_mainfest>
+                    <file_type>PDF</file_type>
+                    <file_type>A4</file_type>
+                </dpd_mainfest>
             </mageviper_dpd>
         </mageviper_shipping_integration>
     </default>

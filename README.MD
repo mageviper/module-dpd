@@ -124,7 +124,7 @@ Every package could be `send`,`download protocol`,`download label` individually
 
 - [ ] Remove manifests with parcels
 - [ ] Manifest and labels archive
-- [ ] Set file type and Label type form config 
+- [x] Set file type and Label type form config 
 
 #### Build With
 

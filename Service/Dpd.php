@@ -16,6 +16,9 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\OrderRepository;
 use Mageviper\Dpd\Api\Data\PackageInterface;
 use Mageviper\Dpd\Helper\Data;
+use Mageviper\Dpd\lib\Request\GenerateLabel;
+use Mageviper\Dpd\lib\Request\GeneratePackageNumber;
+use Mageviper\Dpd\lib\Request\GenerateProtocol;
 use T3ko\Dpd\Api;
 use T3ko\Dpd\Objects\Package;
 use T3ko\Dpd\Objects\Parcel;
@@ -23,9 +26,6 @@ use T3ko\Dpd\Objects\Receiver;
 use T3ko\Dpd\Objects\RegisteredParcel;
 use T3ko\Dpd\Objects\Sender;
 use T3ko\Dpd\Request\FindPostalCodeRequest;
-use T3ko\Dpd\Request\GenerateLabelsRequest;
-use T3ko\Dpd\Request\GeneratePackageNumbersRequest;
-use T3ko\Dpd\Request\GenerateProtocolRequest;
 use T3ko\Dpd\Soap\Types\FindPostalCodeV1Request;
 
 /**
@@ -148,7 +148,7 @@ class Dpd
             $this->prepareReceiver($order),
             [$this->prepareParcel($order)]
         );
-        $package       = GeneratePackageNumbersRequest::fromPackage($packageObject);
+        $package       = GeneratePackageNumber::fromPackage($packageObject);
         $response      = $connection->generatePackageNumbers($package);
         list($package) = $response->getPackages();
         list($parcel) = $package->getParcels();
@@ -164,7 +164,9 @@ class Dpd
     public function generateLabelsFromParcelsId(array $parcelsId)
     {
         $connection    = $this->connection();
-        $labelsRequest = GenerateLabelsRequest::fromParcelIds($parcelsId);
+        $labelsRequest = GenerateLabel::fromParcelIds($parcelsId)
+                                      ->setPageFormat($this->data->getFileType())
+                                      ->setPageSize($this->data->getLabelType());
         $response      = $connection->generateLabels($labelsRequest);
 
         return $response->getFileContent();
@@ -177,8 +179,9 @@ class Dpd
      */
     public function generateProtocolFromParcelsId(array $parcelsId): string
     {
-        $connection      = $this->connection();
-        $protocolRequest = GenerateProtocolRequest::fromParcelIds($parcelsId);
+        $connection = $this->connection();
+
+        $protocolRequest = GenerateProtocol::fromParcelIds($parcelsId);
         $response        = $connection->generateProtocol($protocolRequest);
 
         return $response->getFileContent();
