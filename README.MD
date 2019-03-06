@@ -1,6 +1,6 @@
 # DPD
 
-![shipping-config](Docs/img/dpd_logo_transparent.png "Config Shipping Dpd")
+![shipping-config](docs/img/dpd_logo_transparent.png "Config Shipping Dpd")
 
 
 
@@ -38,13 +38,13 @@ php bin/magento setup:static-content:deploy
 
 `Stores -> Configuration -> General -> General`
  
-![config](Docs/img/general_config.png "Config Dpd")
+![config](docs/img/general_config.png "Config Dpd")
 
 
 
 `Stores -> Configuration -> Mageviper → Shipping Integration → Dpd`
 
-![config](Docs/img/mageviper_dpd_config.png "Config Dpd")
+![config](docs/img/mageviper_dpd_config.png "Config Dpd")
 
 
 
@@ -73,7 +73,7 @@ php bin/magento setup:static-content:deploy
 
 `Stores -> Configuration -> Sales -> Shipping Methods`
 
-![shipping-config](Docs/img/config_shipping_dpd.png "Config Shipping Dpd")
+![shipping-config](docs/img/config_shipping_dpd.png "Config Shipping Dpd")
 
 |NAME             |DESCRIPTION                 |
 |:----------------|:---------------------------|
@@ -87,7 +87,7 @@ php bin/magento setup:static-content:deploy
 
 Prepare data `Mageviper -> Dpd Courier -> Prepare orders to mnifest`
 
-![dpd-manifest-grid](Docs/img/dpd_manifest_grid.png "Dpd Manifest Grid")
+![dpd-manifest-grid](docs/img/dpd_manifest_grid.png "Dpd Manifest Grid")
 
 | COLUMN       | DESCRIPTION                                                           |
 |:-------------|:----------------------------------------------------------------------|
@@ -109,7 +109,7 @@ Prepare data `Mageviper -> Dpd Courier -> Prepare orders to mnifest`
 
 You can see every package collected by manifest on click on manifest row
 
-![dpd-manifest-grid](Docs/img/dpd_packages_grid.png "Dpd Packages Grid")
+![dpd-manifest-grid](docs/img/dpd_packages_grid.png "Dpd Packages Grid")
 
 |COLUMN         |DESCRIPTION         |
 |:--------------|:-------------------|
@@ -123,8 +123,12 @@ Every package could be `send`,`download protocol`,`download label` individually
 #### TODO
 
 - [ ] Remove manifests with parcels
-- [ ] Manifest and labels archive
-- [x] Set file type and Label type form config 
+- [ ] Auto generate labels and protocol 
+
+#### DONE
+
+- [x] Manifest and labels archive (loaded from media directory?)
+- [x] Set file type and Label type form config
 
 #### Build With
 

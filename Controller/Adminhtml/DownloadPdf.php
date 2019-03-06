@@ -17,6 +17,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\Phrase;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -55,12 +56,17 @@ abstract class DownloadPdf extends Action
      * @var Dpd
      */
     protected $dpdService;
+    /**
+     * @var File
+     */
+    protected $fileSystemIo;
 
     /**
      * DownloadLabels constructor.
      * @param Context               $context
      * @param FileFactory           $fileFactory
      * @param StoreManagerInterface $storeManager
+     * @param File                  $fileSystemIo
      * @param DataManagement        $management
      * @param Dpd                   $dpdService
      * @throws NoSuchEntityException
@@ -69,6 +75,7 @@ abstract class DownloadPdf extends Action
         Context $context,
         FileFactory $fileFactory,
         StoreManagerInterface $storeManager,
+        File $fileSystemIo,
         DataManagement $management,
         Dpd $dpdService
     ) {
@@ -78,6 +85,7 @@ abstract class DownloadPdf extends Action
         $this->mediaUrl     = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
         $this->management   = $management;
         $this->dpdService   = $dpdService;
+        $this->fileSystemIo = $fileSystemIo;
     }
 
     /**
@@ -85,8 +93,13 @@ abstract class DownloadPdf extends Action
      */
     public function execute()
     {
-        try {
+        if (!$this->fileSystemIo->fileExists($this->getFilePath())) {
             $content = $this->fileContent();
+        } else {
+            $content = base64_encode($this->getFilePath());
+        }
+        try {
+
             if ($content !== null) {
                 $this->fileFactory->create(
                     $this->pdfName(),
@@ -96,10 +109,12 @@ abstract class DownloadPdf extends Action
                 );
             }
             $this->messageManager->addSuccessMessage($this->message());
-            $this->_redirect('*/manifest/index');
+
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
+
+        $this->_redirect('*/manifest/index');
 
     }
 
@@ -156,4 +171,12 @@ abstract class DownloadPdf extends Action
      * @return Phrase
      */
     abstract protected function message(): Phrase;
+
+    /**
+     * @return string
+     */
+    protected function getFilePath(): string
+    {
+        return DirectoryList::MEDIA . DIRECTORY_SEPARATOR . $this->pdfName();
+    }
 }

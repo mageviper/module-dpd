@@ -30,8 +30,8 @@ class Data extends AbstractHelper
     const XML_CONFIG_ORDER_STATUS_TO_SEND = 'mageviper_shipping_integration/mageviper_dpd/integration/order_status_to_send';
     const XML_PATH_MANIFEST_FILE          = 'mageviper_shipping_integration/mageviper_dpd/dpd_mainfest/file_type';
     const XML_PATH_MANIFEST_LABEL         = 'mageviper_shipping_integration/mageviper_dpd/dpd_mainfest/label_type';
-    const XML_PATH_CRON_QUEUE             = 'mageviper_shipping_integration/dpd_cron/prepare';
-    const XML_PATH_CRON_MANIFEST          = 'mageviper_shipping_integration/dpd_cron/queue';
+    const XML_PATH_CRON_QUEUE             = 'mageviper_shipping_integration/mageviper_dpd/dpd_cron/queue';
+    const XML_PATH_CRON_MANIFEST          = 'mageviper_shipping_integration/mageviper_dpd/dpd_cron/prepare';
     const XML_PATH_CARRIER_ORDER_STATUS   = 'carriers/dpd/order_status';
     const XML_PATH_CARRIER_TITLE          = 'carriers/dpd/title';
     const XML_PATH_CARRIER_MAX_WEIGHT     = 'carriers/dpd/max_weight';

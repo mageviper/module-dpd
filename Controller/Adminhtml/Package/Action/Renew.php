@@ -69,7 +69,6 @@ class Renew extends Action
     {
         $orderId   = $this->getRequest()->getParam('order_id');
         $packageDO = $this->packageRepository->getByOrderId((int)$orderId);
-//        $order     = $this->orderRepository->get($orderId);
         /** @var RegisteredParcel $package */
         $package = $this->dpdService->preparePackage($packageDO);
         $packageDO->setPackageId($package->getId());
